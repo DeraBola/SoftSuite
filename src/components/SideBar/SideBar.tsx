@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Icons } from "@/components/Icons/Icons";
+import { useRouter, usePathname } from "next/navigation";
 
 function SideBar () {
+  const router = useRouter();
+  const pathname = usePathname();
   const [dropDown, setDropDown] = useState(false);
 
   const handleDropdownClick = () => {
@@ -30,7 +33,7 @@ function SideBar () {
         <Icons.arrowDown />
       </div>
       <div className=" flex flex-col w-full items-start justify-start gap-9">
-        <div className="w-full flex items-center justify-start gap-3">
+        <div className="w-full flex items-center justify-start gap-3" onClick={() => router.push("/")}>
           <Icons.dashboard />
           <p className="text-sm font-medium text-gray-100">Dashboard</p>
         </div>
@@ -46,7 +49,7 @@ function SideBar () {
           <p className="text-sm font-medium text-gray-100">salary structure</p>
         </div>
         <div className="flex flex-col  w-full">
-          <div className={`w-full flex items-center justify-between text-gray-100 ${dropDown ? "hover:text-white hover:bg-green-100" : "text-gray-100 bg-white"}  rounded-md hover:px-2 hover:py-3`} onClick={handleDropdownClick}>
+          <div className={`w-full flex items-center justify-between text-gray-100 ${dropDown ? "text-white bg-green-100 px-2 py-3" : "text-gray-100 bg-white"}  rounded-md `} onClick={handleDropdownClick}>
             <div className="flex items-center justify-center gap-2">
               {dropDown ?  <Icons.settings /> : <Icons.graySettings />}
               <p className="text-sm font-medium ">element setup</p>
@@ -54,8 +57,8 @@ function SideBar () {
             {dropDown ? <Icons.whiteArrowUp /> : <Icons.grayArrowDown />}
           </div>
           {dropDown &&   <div className="text-blue-100 flex flex-col w-full top-10 gap-4 mt-3 text-sm font-medium">
-            <p className="flex hover:px-2 hover:py-2.5 hover:rounded-lg hover:bg-green-200 hover:rounded-b-none">Elements</p>
-            <p className="flex hover:px-2 hover:py-2.5 hover:rounded-lg hover:bg-green-200 hover:rounded-b-none">Elements</p>
+            <p className={`flex ${pathname === "/elements" ? "px-2  py-2.5  rounded-lg  bg-green-200  rounded-b-none" : ""}`}  onClick={() => router.push("elements")}>Elements</p>
+            <p className="flex hover:px-2 hover:py-2.5 hover:rounded-lg hover:bg-green-200 hover:rounded-b-none">Balances</p>
           </div>}
 
         </div>

@@ -17,11 +17,12 @@ const config = {
     },
     extend: {
       colors: {
-        blue: { 100: "#2D416F" },
+        blue: { 100: "#2D416F", 200: "#F6F7F9" },
         green: { 100: "#4BAA79", 200: "#F3FFF1" },
         gray: {
           50: "#96A0B7",
-          100: "#818DA9"
+          100: "#818DA9",
+          200: "#57678C"
         },
 
         border: "hsl(var(--border))",
@@ -79,7 +80,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),  require("tailwind-scrollbar")],
 } satisfies Config;
 
 export default config;
