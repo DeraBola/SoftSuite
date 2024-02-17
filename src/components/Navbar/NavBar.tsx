@@ -6,7 +6,7 @@ import { Avi } from "@/components/assets/img";
 
 function NavBar () {
   return (
-    <div className="fixed z-40 flex w-[calc(100%-302px)] border border-b justify-between left-[302px] top-0 px-5 py-4">
+    <div className="fixed z-40 bg-white flex w-[calc(100%-302px)] border border-b justify-between left-[302px] top-0 px-5 py-4">
       <div className="flex items-center justify-center gap-9">
         <div className="flex items-center justify-between p-2 gap-10 rounded-sm bg-blue-200">
           <Icons.home />

@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Icons } from "@/components/Icons/Icons";
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
+import { Logo } from "@/components/assets";
 
 function SideBar () {
   const router = useRouter();
@@ -15,10 +17,9 @@ function SideBar () {
   };
 
   return (
-    <div className="bg-white w-[302px] overflow-y-auto flex flex-col gap-10 px-5 items-start justify-start h-screen fixed left-0 top-0 cursor-pointer pb-16">
+    <div className="bg-white scrollbar-thin scrollbar-thumb-gray-100 scrollbar-track-gray-300 w-[302px] overflow-y-auto flex flex-col gap-10 px-5 items-start justify-start h-screen fixed left-0 top-0 cursor-pointer pb-16">
       <div className="font-bold text-3xl mt-10 text-[#bdf3d7cd]">
-        Soft
-        <span className="text-[#2D416F]">SUITE</span>
+        <Image src={Logo} alt="" />
       </div>
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center justify-center gap-3">
