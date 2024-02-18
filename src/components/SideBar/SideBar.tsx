@@ -3,17 +3,17 @@
 import React, { useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { Icons } from "@/components/Icons/Icons";
-import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import { Logo } from "@/components/assets";
+import { SideBarBottomTabs, SideBarTopTabs } from "@/utils/MockData";
+import Link from "next/link";
 
 function SideBar () {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [dropDown, setDropDown] = useState(false);
+  const [isActive, setActive] = useState<number | null>(3);
 
-  const handleDropdownClick = () => {
-    setDropDown(!dropDown);
+  const handleTabClick = (index: number) => {
+    console.log("Clicked tab index:", index);
+    setActive((prevTabIndex) => (prevTabIndex === index ? null : index));
   };
 
   return (
@@ -34,22 +34,36 @@ function SideBar () {
         <Icons.arrowDown />
       </div>
       <div className=" flex flex-col w-full items-start justify-start gap-9">
-        <div className="w-full flex items-center justify-start gap-3" onClick={() => router.push("/")}>
-          <Icons.dashboard />
-          <p className="text-sm font-medium text-gray-100">Dashboard</p>
-        </div>
-        <div className="w-full flex items-center justify-between">
-          <div className="flex items-center justify-center gap-2">
-            <Icons.activity />
-            <p className="text-sm font-medium text-gray-100">payroll activities</p>
+        {SideBarTopTabs.map((tabs, index) => (
+          <div className="flex flex-col w-full" key={index}>
+            {isActive === index ? (
+              <div className="w-full flex items-center justify-between bg-green-100 px-2 py-3 rounded-md" onClick={() => handleTabClick(index)}>
+                <div className="flex w-full items-center justify-start gap-2">
+                  {tabs.ActiveIcon}
+                  <p className="text-sm font-medium text-white">{tabs.name}</p>
+                </div>
+                {tabs.whiteArrowDown}
+              </div>
+            ) : (
+              <div className="w-full flex items-center justify-between" onClick={() => handleTabClick(index)}>
+                <div className="flex items-center justify-center gap-2">
+                  {tabs.icon}
+                  <p className="text-sm font-medium text-gray-100">{tabs.name}</p>
+                </div>
+                {tabs.grayArrowDown}
+              </div>
+            )}
+            {isActive === index && tabs.menus && tabs.menus.map((menu, menuIndex) => (
+              <div className="text-blue-100 flex flex-col w-full top-10 gap-4 mt-3 text-sm font-medium" key={menuIndex}>
+                <Link href={menu.link} className={`flex ${menu.link === "/elements" ? "px-2 py-2.5 rounded-lg bg-green-200 rounded-b-none" : ""}`}  >
+                  {menu.name}
+                </Link>
+              </div>
+            ))}
           </div>
-          <Icons.grayArrowDown />
-        </div>
-        <div className="w-full flex items-center justify-start gap-3">
-          <Icons.structure />
-          <p className="text-sm font-medium text-gray-100">salary structure</p>
-        </div>
-        <div className="flex flex-col  w-full">
+        ))}
+
+        {/* <div className="flex flex-col  w-full">
           <div className={`w-full flex items-center justify-between text-gray-100 ${dropDown ? "text-white bg-green-100 px-2 py-3" : "text-gray-100 bg-white"}  rounded-md `} onClick={handleDropdownClick}>
             <div className="flex items-center justify-center gap-2">
               {dropDown ?  <Icons.settings /> : <Icons.graySettings />}
@@ -61,30 +75,34 @@ function SideBar () {
             <p className={`flex ${pathname === "/elements" ? "px-2  py-2.5  rounded-lg  bg-green-200  rounded-b-none" : ""}`}  onClick={() => router.push("elements")}>Elements</p>
             <p className="flex hover:px-2 hover:py-2.5 hover:rounded-lg hover:bg-green-200 hover:rounded-b-none">Balances</p>
           </div>}
-
-        </div>
-        <div className="w-full flex items-center justify-start gap-3">
-          <Icons.profile />
-          <p className="text-sm font-medium text-gray-100">Employees</p>
-        </div>
+        </div> */}
       </div>
       <Separator className="bg-gray-50" />
       <div className="flex flex-col w-full items-start justify-start gap-9">
-        <div className="w-full flex items-center justify-between">
+        {SideBarBottomTabs.map((items, index) => (
+          <div className="w-full flex items-center justify-between" key={index}>
+            <div className="flex items-center justify-center gap-2">
+              {items.icon}
+              <p className="text-sm font-medium text-gray-100">{items.name}</p>
+            </div>
+            {items.icon2}
+          </div>
+        ))}
+        {/* <div className="w-full flex items-center justify-between">
           <div className="flex items-center justify-center gap-2">
             <Icons.graySettings />
             <p className="text-sm font-medium text-gray-100">Payroll Settings</p>
           </div>
           <Icons.grayArrowDown />
-        </div>
-        <div className="w-full flex items-center justify-start gap-3">
+        </div> */}
+        {/* <div className="w-full flex items-center justify-start gap-3">
           <Icons.profile2 />
           <p className="text-sm font-medium text-gray-100">My Account</p>
-        </div>
-        <div className="w-full flex items-center justify-start gap-3">
+        </div> */}
+        {/* <div className="w-full flex items-center justify-start gap-3">
           <Icons.logOut />
           <p className="text-sm font-medium text-gray-100">Logout</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
