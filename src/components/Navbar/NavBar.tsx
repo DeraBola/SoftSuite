@@ -17,7 +17,7 @@ function NavBar () {
           <Icons.arrowDown />
         </div>
         <div className="flex items-center justify-center">
-          <Input placeholder="Search for anything..." className="border border-r-0 rounded-r-none py-3 placeholder:text-gray-200 text-base font-normal" />
+          <Input placeholder="Search for anything..." className="border border-r-0 rounded-r-none py-3 focus:outline-none placeholder:text-gray-200 text-base font-normal" />
           <div className="flex items-center justify-center bg-green-100 rounded-tr rounded-br px-3 py-[10px]">
             <Icons.search />
           </div>

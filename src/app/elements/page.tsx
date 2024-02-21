@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Icons } from "@/components/Icons/Icons";
 import Image from "next/image";
 import { Ellipse } from "@/components/assets";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import CreateElement from "@/components/ModalComponent/CreateElement";
 
 function Elements () {
   const router = useRouter();
@@ -36,10 +38,17 @@ function Elements () {
               <Icons.Filter />
             </div>
           </div>
-          <button className="flex bg-[#4BAA79] items-center justify-center gap-2 p-4 rounded-md">
-            <p className="font-bold text-base text-white"> Create Element</p>
-            <Icons.Add />
-          </button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="flex bg-[#4BAA79] items-center justify-center gap-2 p-4 rounded-md">
+                <p className="font-bold text-base text-white"> Create Element</p>
+                <Icons.Add />
+              </button>
+            </DialogTrigger>
+            <DialogContent className="w-[30rem]">
+              <CreateElement />
+            </DialogContent>
+          </Dialog>
         </div>
         <div className="mt-20 flex flex-col gap-3 items-center justify-center ml-[24rem]">
           <Image src={Ellipse} alt="" />
